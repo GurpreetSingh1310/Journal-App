@@ -1,7 +1,7 @@
 package com.project.journalApp.service;
 
-import com.project.journalApp.entity.JournalEntry;
-import com.project.journalApp.repository.JournalEntryRepo;
+import com.project.journalApp.entity.User;
+import com.project.journalApp.repository.UserRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,24 +10,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class JournalEntryService {
+public class UserEntryService {
 
     @Autowired
-    private JournalEntryRepo journalEntryRepo;
+    private UserRepo userRepo;
 
-    public void saveEntry(JournalEntry JournalEntry) {
-        journalEntryRepo.save(JournalEntry);
+    public void saveEntry(User user) {
+        userRepo.save(user);
     }
 
-    public List<JournalEntry> getAll() {
-        return journalEntryRepo.findAll();
+    public List<User> getAll() {
+        return userRepo.findAll();
     }
 
-    public Optional<JournalEntry> getById(ObjectId id) {
-        return journalEntryRepo.findById(id);
+    public Optional<User> getById(ObjectId id) {
+        return userRepo.findById(id);
     }
 
     public void deleteById(ObjectId id) {
-        journalEntryRepo.deleteById(id);
+        userRepo.deleteById(id);
+    }
+
+    public User findByUsername(String username) {
+        return userRepo.findByUsername(username);
     }
 }

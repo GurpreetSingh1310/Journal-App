@@ -1,58 +1,33 @@
 package com.project.journalApp.entity;
 
+import com.project.journalApp.service.UserEntryService;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NonNull;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-@Document(collection = "journal_entries")
+@Document(collection = "users")
 @Data
-public class JournalEntry {
-//    @Setter
-//    @Getter
+public class User {
     @Id
     private ObjectId id;
-    private String title;
-    private String content;
-    private LocalDateTime date;
 
+    @Indexed(unique = true)
+    private String username;
 
-//    public ObjectId getId() {
-//        return id;
-//    }
-//
-//    public void setId(ObjectId id) {
-//        this.id = id;
-//    }
-//
-//    public String getContent() {
-//        return content;
-//    }
-//
-//    public void setContent(String content) {
-//        this.content = content;
-//    }
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
-//    public LocalDateTime getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(LocalDateTime date) {
-//        this.date = date;
-//    }
+    @NonNull
+    private String password;
+
+    @DBRef
+    private List<JournalEntry> journal_entries= new ArrayList<>();
+
 
 
 }
